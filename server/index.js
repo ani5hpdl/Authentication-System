@@ -3,11 +3,13 @@ const express = require("express");
 const helmet = require("helmet");
 
 const { connectDB, sequelize } = require("./src/config/db");
-const authRoute = require("./src/modules/auth/authRoute")
+const authRoute = require("./src/modules/auth/authRoute");
+const { globalLimiter } = require("./src/middlewares/rateLimiter");
 
 const app = express();
 
 app.use(helmet());
+app.use(globalLimiter);
 
 app.use(express.json());
 // app.use("/", (req, res) => {
