@@ -20,7 +20,8 @@ const register = async(req,res) => {
 
         const hashedPassword =await bcrypt.hash(password,10);
 
-        const verificationToken = crypto.randomBytes(32).toString("hex");
+        const rawToken = crypto.randomBytes(32).toString("hex");
+        const verificationToken = crypto.createHash("sha256").update(rawToken).toString("hex");
         const verificationExpiresIn = new Date(Date.now() + 60*60*1000);
 
         const newUser = await User.create({
@@ -32,13 +33,11 @@ const register = async(req,res) => {
             passwordHistory : [hashedPassword]
         });
 
-        const isSend =await sendVerificationEmail({
+        await sendVerificationEmail({
             name,
             email,
-            token : verificationToken
+            token : rawToken
         });
-
-        console.log(isSend);
 
         return res.status(201).json({
             success : true,

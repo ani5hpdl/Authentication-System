@@ -26,7 +26,6 @@ const sendEmail = async ({ to, subject, html }) => {
             html,
         });
 
-        console.log("Email Sent: ", info.messageId);
         return ({
             success: true,
             message: "Email Sent Sucessfully"
