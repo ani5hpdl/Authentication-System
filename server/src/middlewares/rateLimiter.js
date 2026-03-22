@@ -17,6 +17,22 @@ const globalLimiter = rateLimit({
     }
 });
 
+const registerLimiter = rateLimit({
+    windowMs : 10 * 60 * 1000,
+    max : 10,
+    standardHeaders : true,
+    legacyHeaders : false,
+    keyGenerator : (req) => {
+        const ip = rateLimit.ipKeyGenerator(req);
+        return `${ip}`; //unique ip
+    },
+    message : {
+        success : false,
+        message : "Too many registration requests. Please try again later!"
+    },
+});
+
 module.exports = {
-    globalLimiter
+    globalLimiter,
+    registerLimiter
 }
