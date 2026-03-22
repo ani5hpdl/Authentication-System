@@ -1,5 +1,6 @@
 const { where } = require("sequelize");
 const User = require("./authModel");
+const { sendVerificationEmail } = require("../../utils/sendEmail");
 
 const register = async(req,res) => {
 
@@ -27,6 +28,12 @@ const register = async(req,res) => {
             verificationToken,
             verificationExpiresIn,
             passwordHistory : [hashedPassword]
+        });
+
+        sendVerificationEmail({
+            name,
+            email,
+            token : verificationToken
         });
 
         return res.status(201).json({
