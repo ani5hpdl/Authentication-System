@@ -18,10 +18,10 @@ const registerSchema = Joi.object({
 
     password: Joi.string().required()
         .min(6).max(16)
-        .pattern([/A-Z/],"uppercase letters")
-        .pattern([/a-z/],"lowercase letters")
-        .pattern([/0-9/],"numbers")
-        .pattern([/!@#$%^&*/],"speial characters")
+        .pattern(/[a-z]/,"lowercase letter")
+        .pattern(/[A-Z]/, "uppercase letter")
+        .pattern(/[0-9]/, "number")
+        .pattern(/[@#$%&*!?]/, "special character")
         .messages({
             "string.min" : "Password must be at least {#limit} characters.",
             "string.max" : "Password must be at less than {#limit} characters.",
@@ -31,7 +31,7 @@ const registerSchema = Joi.object({
         }),
 
     confirmPassword: Joi.string()
-        .valid(ref("password"))
+        .valid(Joi.ref("password"))
         .required()
         .messages({
             "any.only" : "Password and Confirm Password doesnot match.",
