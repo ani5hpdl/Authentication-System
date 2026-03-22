@@ -110,7 +110,7 @@ const baseTemplate = (content) => `
 
 // ── Template 1 — Email Verification ──────────────────
 const emailVerificationTemplate = ({ name, verificationUrl }) =>
-  baseTemplate(`
+    baseTemplate(`
     <div class="body">
       <p>Hi <strong>${name}</strong>,</p>
       <p>
@@ -135,7 +135,7 @@ const emailVerificationTemplate = ({ name, verificationUrl }) =>
 
 // ── Template 2 — Password Reset ───────────────────────
 const passwordResetTemplate = ({ name, resetUrl }) =>
-  baseTemplate(`
+    baseTemplate(`
     <div class="body">
       <p>Hi <strong>${name}</strong>,</p>
       <p>
@@ -161,7 +161,7 @@ const passwordResetTemplate = ({ name, resetUrl }) =>
 
 // ── Template 3 — Welcome Email ────────────────────────
 const welcomeTemplate = ({ name }) =>
-  baseTemplate(`
+    baseTemplate(`
     <div class="body">
       <p>Hi <strong>${name}</strong>,</p>
       <p>
@@ -182,7 +182,7 @@ const welcomeTemplate = ({ name }) =>
 
 // ── Template 4 — Login Alert ──────────────────────────
 const loginAlertTemplate = ({ name, ip, userAgent, time }) =>
-  baseTemplate(`
+    baseTemplate(`
     <div class="body">
       <p>Hi <strong>${name}</strong>,</p>
       <p>
@@ -213,7 +213,7 @@ const loginAlertTemplate = ({ name, ip, userAgent, time }) =>
 
 // ── Template 5 — OTP Code ─────────────────────────────
 const otpTemplate = ({ name, otp }) =>
-  baseTemplate(`
+    baseTemplate(`
     <div class="body">
       <p>Hi <strong>${name}</strong>,</p>
       <p>
@@ -230,9 +230,9 @@ const otpTemplate = ({ name, otp }) =>
   `);
 
 module.exports = {
-  emailVerificationTemplate,
-  passwordResetTemplate,
-  welcomeTemplate,
-  loginAlertTemplate,
-  otpTemplate,
+    emailVerificationTemplate,
+    passwordResetTemplate,
+    welcomeTemplate,
+    loginAlertTemplate,
+    otpTemplate,
 };

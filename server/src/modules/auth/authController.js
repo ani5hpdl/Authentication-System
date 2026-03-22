@@ -1,6 +1,8 @@
 const { where } = require("sequelize");
 const User = require("./authModel");
 const { sendVerificationEmail } = require("../../utils/sendEmail");
+const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 
 const register = async(req,res) => {
 
@@ -16,7 +18,7 @@ const register = async(req,res) => {
             });
         }
 
-        const hashedPassword = bcrypt.hash(password,10);
+        const hashedPassword =await bcrypt.hash(password,10);
 
         const verificationToken = crypto.randomBytes(32).toString("hex");
         const verificationExpiresIn = new Date(Date.now() + 60*60*1000);
@@ -30,11 +32,13 @@ const register = async(req,res) => {
             passwordHistory : [hashedPassword]
         });
 
-        sendVerificationEmail({
+        const isSend =await sendVerificationEmail({
             name,
             email,
             token : verificationToken
         });
+
+        console.log(isSend);
 
         return res.status(201).json({
             success : true,
